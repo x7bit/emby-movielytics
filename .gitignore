@@ -40,6 +40,7 @@ coverage/
 
 # Miscellaneous
 .idea/
+deploy.ps1
 
 # Emby Movielytics
 assets/
