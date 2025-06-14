@@ -6,5 +6,6 @@
   "trailingComma": "es5",
   "bracketSpacing": true,
   "arrowParens": "avoid",
-  "vueIndentScriptAndStyle": false
+  "vueIndentScriptAndStyle": false,
+  "plugins": ["prettier-plugin-vue"]
 }
