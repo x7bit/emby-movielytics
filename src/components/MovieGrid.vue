@@ -50,8 +50,8 @@ const sortMovies = (type: SortType): void => {
   sortAsc.value = asc;
 };
 
-const getSortIcon = (type: SortType): string | undefined => {
-  if (sortType.value !== type) return undefined;
+const getSortIcon = (type: SortType): string => {
+  if (sortType.value !== type) return "unfold_more";
   return sortAsc.value ? "keyboard_arrow_up" : "keyboard_arrow_down";
 };
 
@@ -130,11 +130,13 @@ const toggleSynopsis = () => {
 .movie-controls {
   margin-bottom: 1rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.5rem;
 
   .movie-sort {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     gap: 0.5rem;
   }

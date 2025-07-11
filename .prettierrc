@@ -7,5 +7,5 @@
   "bracketSpacing": true,
   "arrowParens": "avoid",
   "vueIndentScriptAndStyle": false,
-  "plugins": ["prettier-plugin-vue"]
+  "htmlWhitespaceSensitivity": "ignore"
 }
