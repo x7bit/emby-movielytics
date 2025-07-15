@@ -20,6 +20,7 @@ const filteredMovies = computed(() => {
   return movies.value.filter(movie => {
     return (
       movie.title.toLowerCase().includes(term) ||
+      movie.originalTitle.toLowerCase().includes(term) ||
       movie.directors.join(" ").toLowerCase().includes(term) ||
       movie.actors.join(" ").toLowerCase().includes(term)
     );
