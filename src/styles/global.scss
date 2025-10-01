@@ -1,0 +1,26 @@
+#movielytics {
+  // Utility classes
+  .margin-bottom-2rem {
+    margin-bottom: 2rem;
+  }
+
+  .padding-bottom-1rem {
+    padding-bottom: 1rem;
+  }
+
+  // Animations
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.3s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  .fade-move {
+    transition: transform 0.3s ease;
+  }
+}
