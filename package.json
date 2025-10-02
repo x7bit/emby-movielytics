@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "vue-tsc --noEmit --pretty",
+    "lint": "prettier --check . --end-of-line auto",
+    "lint:fix": "prettier --check --write . --end-of-line auto"
   },
   "dependencies": {
     "vue": "^3.5.22"
