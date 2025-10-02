@@ -20,9 +20,7 @@ const clear = () => {
 <template>
   <div class="base-input">
     <input :value="modelValue" :placeholder="placeholder" @input="updateValue" />
-    <button v-if="clearable && modelValue" type="button" @click="clear" class="clear-btn" aria-label="Limpiar">
-      ✕
-    </button>
+    <button v-if="clearable && modelValue" type="button" @click="clear" class="clear-btn" aria-label="Limpiar">✕</button>
   </div>
 </template>
 
