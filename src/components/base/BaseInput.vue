@@ -40,8 +40,7 @@ const clear = () => {
     border: 1px solid #3e4451;
     border-radius: 4px;
     font-size: 1rem;
-    width: auto;
-    min-width: 200px;
+    width: 100%;
 
     &:focus {
       outline: none;

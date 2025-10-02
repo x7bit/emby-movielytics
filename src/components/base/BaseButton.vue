@@ -14,6 +14,7 @@ defineProps<{
 <style scoped lang="scss">
 .base-button {
   display: inline-flex;
+  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.8rem;
@@ -26,6 +27,7 @@ defineProps<{
   cursor: pointer;
   transition: all 0.2s ease;
   line-height: 1.5;
+  width: max-content;
 
   &:hover {
     background-color: #2d3344;

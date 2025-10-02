@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import moviesJson from "../assets/movies.json";
 import { Movie } from "../entity/movie";
-import MovieComponent from "./Movie.vue";
+import MovieItem from "./MovieItem.vue";
 
 const movies = ref<Movie[]>((moviesJson as Movie[]).sort((a, b) => b.created - a.created).slice(0, 10));
 const expandedMovieId = ref<string | null>(null);
@@ -15,7 +15,7 @@ const toggleExpand = (id: string) => {
 
 <template>
   <transition-group v-if="movies.length > 0" name="fade" tag="div" class="latest-grid">
-    <movie-component
+    <movie-item
       v-for="movie in movies"
       class="latest-item"
       :key="movie.id"
