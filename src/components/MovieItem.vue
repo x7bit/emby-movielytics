@@ -30,22 +30,24 @@ const toggleSynopsis = () => {
   <div class="movie-container" @click="toggleExpand">
     <div class="movie" :style="{ backgroundImage: `url('/thumbs/${movie.image}.jpg')` }">
       <div class="movie-inner" :class="{ active: isExpanded }">
-        <div class="data-container" v-if="isExpanded && !synopsis">
-          <div class="original-title">{{ movie.originalTitle }}</div>
-          <div class="duration">{{ movie.duration }} min</div>
-          <div class="director">{{ movie.directors.join(", ") }}</div>
-          <div class="cast">{{ movie.actors.join(", ") }}</div>
-          <div class="rating">Crítica: {{ Movie.ratingLabel(movie.criticRating) }}</div>
-          <div class="rating">Audiencia: {{ Movie.ratingLabel(movie.audienceRating) }}</div>
-          <div class="video">{{ movie.videoFormat }}</div>
-          <div class="synopsis-link" @click.stop="toggleSynopsis">
-            <span class="synopsis-text">Sinopsis</span>
-            <span class="material-icons">open_in_new</span>
+        <template v-if="isExpanded">
+          <div class="data-container" v-show="!synopsis">
+            <div class="original-title">{{ movie.originalTitle }}</div>
+            <div class="duration">{{ movie.duration }} min</div>
+            <div class="director">{{ movie.directors.join(", ") }}</div>
+            <div class="cast">{{ movie.actors.join(", ") }}</div>
+            <div class="rating">Crítica: {{ Movie.ratingLabel(movie.criticRating) }}</div>
+            <div class="rating">Audiencia: {{ Movie.ratingLabel(movie.audienceRating) }}</div>
+            <div class="video">{{ movie.videoFormat }}</div>
+            <div class="synopsis-link" @click.stop="toggleSynopsis">
+              <span class="synopsis-text">Sinopsis</span>
+              <span class="material-icons">open_in_new</span>
+            </div>
           </div>
-        </div>
-        <div class="synopsis-container" v-show="isExpanded && synopsis">
-          <div class="synopsis">{{ movie.overview }}</div>
-        </div>
+          <div class="synopsis-container" v-show="synopsis">
+            <div class="synopsis">{{ movie.overview }}</div>
+          </div>
+        </template>
       </div>
     </div>
     <div class="title">{{ movie.title }}</div>
@@ -137,9 +139,20 @@ const toggleSynopsis = () => {
 
       .synopsis-container {
         padding: 0.2em;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        box-sizing: border-box;
 
         .synopsis {
+          padding-right: 0.25em;
           font-size: 0.7em;
+          line-height: 1.1em;
+          flex: 1 1 auto;
+          box-sizing: border-box;
+          overflow-y: auto;
+          word-break: break-word;
+          hyphens: auto;
         }
       }
     }
