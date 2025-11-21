@@ -30,6 +30,7 @@ const TMDB_API_URL = "https://api.themoviedb.org/3/movie";
 const TMDB_API_KEY = process.env.TMDB_API_KEY ?? "";
 const OMDB_API_URL = "https://www.omdbapi.com/";
 const OMDB_API_KEY = process.env.OMDB_API_KEY ?? "";
+const LANGUAGE = process.env.LANGUAGE ?? "";
 
 const scrap = async () => {
   if (!checkEnvVariables()) return;
@@ -82,6 +83,10 @@ const checkEnvVariables = (): boolean => {
     console.error("❌ OMDB_API_KEY is not set in the environment variables.");
     check = false;
   }
+  if (!LANGUAGE) {
+    console.error("❌ LANGUAGE is not set in the environment variables.");
+    check = false;
+  }
   return check;
 };
 
@@ -127,7 +132,7 @@ const fetchEmbyMovies = async (): Promise<Movie[]> => {
 const fetchTmdbMovie = async (movie: Movie): Promise<Movie | null> => {
   const params = new URLSearchParams({
     api_key: TMDB_API_KEY,
-    language: "es-ES",
+    language: LANGUAGE,
     append_to_response: "credits",
   });
   const url = `${TMDB_API_URL}/${movie.imdbId}?${params.toString()}`;
