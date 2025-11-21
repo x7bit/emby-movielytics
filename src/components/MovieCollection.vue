@@ -58,13 +58,19 @@ const getSortIcon = (type: SortType): string => {
 
 <template>
   <div class="movie-controls">
-    <base-input v-model="search" class="movie-search" placeholder="Título, actor o director" clearable />
+    <base-input v-model="search" class="movie-search" :placeholder="$t('titleActorDirector')" clearable />
     <div class="movie-sort">
-      <base-button class="movie-sort-btn" :icon-right="getSortIcon('title')" @click="sortMovies('title')">Título</base-button>
-      <base-button class="movie-sort-btn" :icon-right="getSortIcon('year')" @click="sortMovies('year')">Año</base-button>
-      <base-button class="movie-sort-btn" :icon-right="getSortIcon('critic')" @click="sortMovies('critic')">Crítica</base-button>
+      <base-button class="movie-sort-btn" :icon-right="getSortIcon('title')" @click="sortMovies('title')">
+        {{ $t("title") }}
+      </base-button>
+      <base-button class="movie-sort-btn" :icon-right="getSortIcon('year')" @click="sortMovies('year')">
+        {{ $t("year") }}
+      </base-button>
+      <base-button class="movie-sort-btn" :icon-right="getSortIcon('critic')" @click="sortMovies('critic')">
+        {{ $t("critic") }}
+      </base-button>
       <base-button class="movie-sort-btn" :icon-right="getSortIcon('audience')" @click="sortMovies('audience')">
-        Audiencia
+        {{ $t("audience") }}
       </base-button>
     </div>
   </div>

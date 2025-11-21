@@ -4,7 +4,7 @@ import LastestMovieGrid from "./LastestMovieGrid.vue";
 </script>
 
 <template>
-  <base-collapsible title="Últimas películas añadidas" :default-expanded="false">
+  <base-collapsible :title="$t('lastestMovies')" :default-expanded="false">
     <lastest-movie-grid />
   </base-collapsible>
 </template>

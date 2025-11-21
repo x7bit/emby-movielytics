@@ -28,7 +28,7 @@ const toggleExpand = (id: string) => {
   </transition-group>
 
   <transition name="fade">
-    <div v-if="movies.length === 0" class="no-results">Sin resultados...</div>
+    <div v-if="movies.length === 0" class="no-results">{{ $t("noResults") }}</div>
   </transition>
 </template>
 

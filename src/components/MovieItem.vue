@@ -36,11 +36,11 @@ const toggleSynopsis = () => {
             <div class="duration">{{ movie.duration }} min</div>
             <div class="director">{{ movie.directors.join(", ") }}</div>
             <div class="cast">{{ movie.actors.join(", ") }}</div>
-            <div class="rating">Crítica: {{ Movie.ratingLabel(movie.criticRating) }}</div>
-            <div class="rating">Audiencia: {{ Movie.ratingLabel(movie.audienceRating) }}</div>
+            <div class="rating">{{ $t("critic") }}: {{ Movie.ratingLabel(movie.criticRating) }}</div>
+            <div class="rating">{{ $t("audience") }}: {{ Movie.ratingLabel(movie.audienceRating) }}</div>
             <div class="video">{{ movie.videoFormat }}</div>
             <div class="synopsis-link" @click.stop="toggleSynopsis">
-              <span class="synopsis-text">Sinopsis</span>
+              <span class="synopsis-text">{{ $t("synopsis") }}</span>
               <span class="material-icons">open_in_new</span>
             </div>
           </div>
