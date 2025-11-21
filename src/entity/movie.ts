@@ -22,7 +22,11 @@ export class Movie {
   }
 
   static sortByTitle(a: Movie, b: Movie): number {
-    return a.title.replace(/^[^a-zA-Z0-9]+/, "").localeCompare(b.title.replace(/^[^a-zA-Z0-9]+/, ""));
+    const _a = a.title.replace(/^[^a-zA-Z0-9]+/, "").toLowerCase();
+    const _b = b.title.replace(/^[^a-zA-Z0-9]+/, "").toLowerCase();
+    if (_a < _b) return -1;
+    if (_a > _b) return 1;
+    return 0;
   }
 
   static sortByYear(a: Movie, b: Movie): number {
