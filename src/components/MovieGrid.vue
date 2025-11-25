@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import MovieItem from "@/components/MovieItem.vue";
+import { Movie } from "@/entity/movie";
 import { ref } from "vue";
-import { Movie } from "../entity/movie";
-import MovieItem from "./MovieItem.vue";
 
 interface Props {
   movies: Movie[];

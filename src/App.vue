@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MovieCollection from "./components/MovieCollection.vue";
-import LastAddedMovies from "./components/LastestMovies.vue";
+import LastAddedMovies from "@/components/LastestMovies.vue";
+import MovieCollection from "@/components/MovieCollection.vue";
 </script>
 
 <template>

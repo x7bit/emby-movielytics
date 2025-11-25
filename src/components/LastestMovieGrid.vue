@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import moviesJson from "@/assets/movies.json";
+import MovieItem from "@/components/MovieItem.vue";
+import { Movie } from "@/entity/movie";
 import { ref } from "vue";
-import moviesJson from "../assets/movies.json";
-import { Movie } from "../entity/movie";
-import MovieItem from "./MovieItem.vue";
 
 const movies = ref<Movie[]>((moviesJson as Movie[]).sort((a, b) => b.created - a.created).slice(0, 10));
 const expandedMovieId = ref<string | null>(null);

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BaseCollapsible from "./base/BaseCollapsible.vue";
-import LastestMovieGrid from "./LastestMovieGrid.vue";
+import BaseCollapsible from "@/components/base/BaseCollapsible.vue";
+import LastestMovieGrid from "@/components/LastestMovieGrid.vue";
 </script>
 
 <template>

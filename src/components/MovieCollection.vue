@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import moviesJson from "@/assets/movies.json";
+import BaseButton from "@/components/base/BaseButton.vue";
+import BaseInput from "@/components/base/BaseInput.vue";
+import MovieGrid from "@/components/MovieGrid.vue";
+import { Movie } from "@/entity/movie";
 import { computed, ref } from "vue";
-import moviesJson from "../assets/movies.json";
-import { Movie } from "../entity/movie";
-import BaseButton from "./base/BaseButton.vue";
-import BaseInput from "./base/BaseInput.vue";
-import MovieGrid from "./MovieGrid.vue";
 
 type SortType = "title" | "year" | "critic" | "audience";
 

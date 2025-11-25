@@ -1,10 +1,10 @@
+import App from "@/App.vue";
+import en from "@/locales/en.json";
+import es from "@/locales/es.json";
+import "@/styles/global.scss";
+import "@/styles/reset-dark.scss";
 import { createApp } from "vue";
 import { createI18n } from "vue-i18n";
-import App from "./App.vue";
-import en from "./locales/en.json";
-import es from "./locales/es.json";
-import "./styles/global.scss";
-import "./styles/reset-dark.scss";
 
 const availableLocales = ["en", "es"];
 const fallbackLocale = "en";

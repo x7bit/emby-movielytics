@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { Movie } from "@/entity/movie";
 import { ref } from "vue";
-import { Movie } from "../entity/movie";
 
 interface Props {
   movie: Movie;
