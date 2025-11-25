@@ -7,17 +7,17 @@ import "./styles/global.scss";
 import "./styles/reset-dark.scss";
 
 const availableLocales = ["en", "es"];
+const fallbackLocale = "en";
 
 const detectLocale = (): string => {
-  const navLang = navigator.language || (navigator as any).userLanguage || "en";
-  const baseLang = navLang.toLowerCase().split("-")[0];
-  if (availableLocales.includes(baseLang)) return baseLang;
-  return "en";
+  const navLang = navigator.language || (navigator as any).userLanguage || fallbackLocale;
+  const lang = navLang.toLowerCase().split("-")[0] as string;
+  return availableLocales.includes(lang) ? lang : fallbackLocale;
 };
 
 const i18n = createI18n({
   locale: detectLocale(),
-  fallbackLocale: "en",
+  fallbackLocale: fallbackLocale,
   messages: { en, es } as any,
 });
 

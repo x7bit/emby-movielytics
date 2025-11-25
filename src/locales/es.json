@@ -5,7 +5,8 @@
   "year": "Año",
   "critic": "Crítica",
   "audience": "Audiencia",
-  "noResults": "Sin resultados...",
   "synopsis": "Sinopsis",
-  "clear": "Limpiar"
+  "clear": "Limpiar",
+  "noResults": "Sin resultados…",
+  "noMovies": "No hay películas…"
 }
