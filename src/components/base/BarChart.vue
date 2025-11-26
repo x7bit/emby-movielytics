@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, Tooltip, plugins } from "chart.js";
+import { BarController, BarElement, CategoryScale, Chart, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
-Chart.register(BarController, BarElement, CategoryScale, Legend, LinearScale, Tooltip, plugins);
+Chart.register(BarController, BarElement, CategoryScale, Legend, LinearScale, Title, Tooltip);
 
 const props = defineProps<{
   title: string;
