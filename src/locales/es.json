@@ -1,5 +1,6 @@
 {
   "lastestMovies": "Últimas películas añadidas",
+  "statistics": "Estadísticas",
   "titleActorDirector": "Título, actor o director",
   "title": "Título",
   "year": "Año",
@@ -8,5 +9,10 @@
   "synopsis": "Sinopsis",
   "clear": "Limpiar",
   "noResults": "Sin resultados…",
-  "noMovies": "No hay películas…"
+  "noMovies": "No hay películas…",
+  "totalSize": "Tamaño total",
+  "movies": "película | películas",
+  "totalDuration": "Duración total",
+  "hours": "hora | horas",
+  "minutes": "minuto | minutos"
 }
