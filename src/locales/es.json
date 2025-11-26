@@ -14,5 +14,7 @@
   "movies": "película | películas",
   "totalDuration": "Duración total",
   "hours": "hora | horas",
-  "minutes": "minuto | minutos"
+  "minutes": "minuto | minutos",
+  "moviesByDecade": "Películas por década",
+  "moviesByGenre": "Películas por género"
 }

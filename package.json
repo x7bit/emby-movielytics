@@ -12,6 +12,7 @@
     "lint:fix": "prettier --check --write . --end-of-line auto"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
     "vue": "^3.5.25",
     "vue-i18n": "^11.2.2"
   },

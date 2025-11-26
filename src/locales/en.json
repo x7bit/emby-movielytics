@@ -14,5 +14,7 @@
   "movies": "movie | movies",
   "totalDuration": "Total duration",
   "hours": "hour | hours",
-  "minutes": "minute | minutes"
+  "minutes": "minute | minutes",
+  "moviesByDecade": "Movies by decade",
+  "moviesByGenre": "Movies by genre"
 }

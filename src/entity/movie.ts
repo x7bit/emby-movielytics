@@ -21,6 +21,15 @@ export class Movie {
     return rating >= 0 ? rating.toFixed(1) : "–";
   }
 
+  static genreLabel(genre: string): string {
+    switch (genre) {
+      case "Science Fiction":
+        return "Sci-Fi";
+      default:
+        return genre;
+    }
+  }
+
   static sortByTitle(a: Movie, b: Movie): number {
     const _a = a.title.replace(/^[^a-zA-Z0-9]+/, "").toLowerCase();
     const _b = b.title.replace(/^[^a-zA-Z0-9]+/, "").toLowerCase();
