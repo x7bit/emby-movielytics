@@ -68,7 +68,7 @@ const genreCount = computed(() => {
   <base-collapsible :title="$t('statistics')" :default-expanded="false">
     <div class="statistics-basic-container">
       <div class="item">
-        <span class="label">{{ $t("totalSize") }}:</span>
+        <span class="label">{{ $t("collectionSize") }}:</span>
         <span class="value">{{ totalMovies }} {{ $t("movies", totalMovies) }}</span>
       </div>
       <div class="item">
@@ -77,20 +77,21 @@ const genreCount = computed(() => {
       </div>
     </div>
     <div class="statistics-chart-container">
-      <bar-chart :title="$t('moviesByDecade')" :labels="decadeLabels" :data="decadeCount" />
-      <bar-chart :title="$t('moviesByGenre')" :labels="genreLabels" :data="genreCount" />
+      <bar-chart :title="$t('moviesByDecade')" :legend="$t('moviesLabel')" :labels="decadeLabels" :data="decadeCount" />
+      <bar-chart :title="$t('moviesByGenre')" :legend="$t('moviesLabel')" :labels="genreLabels" :data="genreCount" />
     </div>
   </base-collapsible>
 </template>
 
 <style scoped lang="scss">
 .statistics-basic-container {
-  padding-bottom: 0.75rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.6rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  gap: 2rem;
-  border-bottom: 1px solid #3e4451;
+  gap: 1rem;
+  border: 1px solid #3e4451;
+  border-radius: 4px;
 
   .item {
     font-size: 1rem;
@@ -107,7 +108,7 @@ const genreCount = computed(() => {
   margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   overflow-x: auto;
   overflow-y: hidden;
 }

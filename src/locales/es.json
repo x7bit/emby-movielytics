@@ -10,11 +10,12 @@
   "clear": "Limpiar",
   "noResults": "Sin resultados…",
   "noMovies": "No hay películas…",
-  "totalSize": "Tamaño total",
+  "collectionSize": "Tamaño de la colección",
   "movies": "película | películas",
   "totalDuration": "Duración total",
   "hours": "hora | horas",
   "minutes": "minuto | minutos",
   "moviesByDecade": "Películas por década",
-  "moviesByGenre": "Películas por género"
+  "moviesByGenre": "Películas por género",
+  "moviesLabel": "Películas"
 }

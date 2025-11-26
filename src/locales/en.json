@@ -10,11 +10,12 @@
   "clear": "Clear",
   "noResults": "No results…",
   "noMovies": "There are no movies…",
-  "totalSize": "Total size",
+  "collectionSize": "Collection size",
   "movies": "movie | movies",
   "totalDuration": "Total duration",
   "hours": "hour | hours",
   "minutes": "minute | minutes",
   "moviesByDecade": "Movies by decade",
-  "moviesByGenre": "Movies by genre"
+  "moviesByGenre": "Movies by genre",
+  "moviesLabel": "Movies"
 }
