@@ -1,67 +1,25 @@
 <script setup lang="ts">
-import moviesJson from "@/assets/movies.json";
 import BarChart from "@/components/base/BarChart.vue";
 import BaseCollapsible from "@/components/base/BaseCollapsible.vue";
-import { Movie } from "@/entity/movie";
-import { computed, ref } from "vue";
+import { store } from "@/store";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
 const i18n = useI18n();
 
-const movies = ref<Movie[]>(moviesJson as Movie[]);
-
-const totalMovies = computed(() => movies.value.length);
-const totalDuration = computed(() => movies.value.reduce((sum, movie) => sum + movie.duration, 0));
-
 const totalDurationLabel = computed(() => {
-  const hours = Math.floor(totalDuration.value / 60);
-  const minutes = totalDuration.value % 60;
+  const hours = Math.floor(store.totalDuration / 60);
+  const minutes = store.totalDuration % 60;
   return `${hours} ${i18n.t("hours", hours)}, ${minutes} ${i18n.t("minutes", minutes)}`;
 });
 
-const decadeMap = computed(() => {
-  const map = new Map<string, number>();
-  movies.value.forEach(movie => {
-    const decade = `${Math.floor(movie.year / 10) * 10}s`;
-    map.set(decade, (map.get(decade) ?? 0) + 1);
-  });
-  return map;
-});
+const handleDecadeBarClick = (label: string) => {
+  store.decadeFilter = label === store.decadeFilter ? "" : label;
+};
 
-const decadeLabels = computed(() => {
-  const decades = Array.from(decadeMap.value.keys()).map(label => parseInt(label));
-  const minDecade = Math.min(...decades);
-  const maxDecade = Math.max(...decades);
-  const range: string[] = [];
-  for (let decade = minDecade; decade <= maxDecade; decade += 10) {
-    range.push(`${decade}s`);
-  }
-  return range;
-});
-
-const decadeCount = computed(() => {
-  return decadeLabels.value.map(decade => decadeMap.value.get(decade) ?? 0);
-});
-
-const genreMap = computed(() => {
-  const map = new Map<string, number>();
-  movies.value.forEach(movie => {
-    movie.genres.forEach(genreRaw => {
-      const genre = Movie.genreLabel(genreRaw);
-      map.set(genre, (map.get(genre) ?? 0) + 1);
-    });
-  });
-  return map;
-});
-
-const genreLabels = computed(() => {
-  const genres = Array.from(genreMap.value.keys());
-  return genres.filter(genre => (genreMap.value.get(genre) ?? 0) >= 10).sort();
-});
-
-const genreCount = computed(() => {
-  return genreLabels.value.map(genre => genreMap.value.get(genre) ?? 0);
-});
+const handleGenreBarClick = (label: string) => {
+  store.genreFilter = label === store.genreFilter ? "" : label;
+};
 </script>
 
 <template>
@@ -69,7 +27,7 @@ const genreCount = computed(() => {
     <div class="statistics-basic-container">
       <div class="item">
         <span class="label">{{ $t("collectionSize") }}:</span>
-        <span class="value">{{ totalMovies }} {{ $t("movies", totalMovies) }}</span>
+        <span class="value">{{ store.totalMovies }} {{ $t("movies", store.totalMovies) }}</span>
       </div>
       <div class="item">
         <span class="label">{{ $t("totalDuration") }}:</span>
@@ -77,8 +35,22 @@ const genreCount = computed(() => {
       </div>
     </div>
     <div class="statistics-chart-container">
-      <bar-chart :title="$t('moviesByDecade')" :legend="$t('moviesLabel')" :labels="decadeLabels" :data="decadeCount" />
-      <bar-chart :title="$t('moviesByGenre')" :legend="$t('moviesLabel')" :labels="genreLabels" :data="genreCount" />
+      <bar-chart
+        :title="$t('moviesByDecade')"
+        :legend="$t('moviesLabel')"
+        :labels="store.decades.labels"
+        :data="store.decades.counts"
+        :selected-label="store.decadeFilter ? store.decadeFilter : undefined"
+        @bar-click="handleDecadeBarClick"
+      />
+      <bar-chart
+        :title="$t('moviesByGenre')"
+        :legend="$t('moviesLabel')"
+        :labels="store.genres.labels"
+        :data="store.genres.counts"
+        :selected-label="store.genreFilter ? store.genreFilter : undefined"
+        @bar-click="handleGenreBarClick"
+      />
     </div>
   </base-collapsible>
 </template>

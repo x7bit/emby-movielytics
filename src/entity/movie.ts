@@ -30,6 +30,11 @@ export class Movie {
     }
   }
 
+  static decadeLabel(year: number): string {
+    const decade = Math.floor(year / 10) * 10;
+    return `${decade}s`;
+  }
+
   static sortByTitle(a: Movie, b: Movie): number {
     const _a = a.title.replace(/^[^a-zA-Z0-9]+/, "").toLowerCase();
     const _b = b.title.replace(/^[^a-zA-Z0-9]+/, "").toLowerCase();
@@ -48,5 +53,9 @@ export class Movie {
 
   static sortByAudienceRating(a: Movie, b: Movie): number {
     return a.audienceRating - b.audienceRating;
+  }
+
+  static sortByCreated(a: Movie, b: Movie): number {
+    return a.created - b.created;
   }
 }

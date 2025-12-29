@@ -9,6 +9,11 @@ const props = defineProps<{
   legend?: string;
   labels: string[];
   data: number[];
+  selectedLabel?: string;
+}>();
+
+const emit = defineEmits<{
+  barClick: [label: string];
 }>();
 
 const chartEl = ref<HTMLElement | null>(null);
@@ -17,6 +22,18 @@ const chartInstance = ref<Chart | null>(null);
 const options = {
   maintainAspectRatio: false,
   responsive: true,
+  onClick: (_event: any, elements: any[]) => {
+    if (elements.length > 0) {
+      const index = elements[0].index;
+      const label = props.labels[index];
+      if (label) {
+        emit("barClick", label);
+      }
+    }
+  },
+  onHover: (event: any, elements: any[]) => {
+    event.native.target.style.cursor = elements.length > 0 ? "pointer" : "default";
+  },
   plugins: {
     title: {
       display: true,

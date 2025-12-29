@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import moviesJson from "@/assets/movies.json";
 import MovieItem from "@/components/MovieItem.vue";
-import { Movie } from "@/entity/movie";
+import { store } from "@/store";
 import { ref } from "vue";
 
-const movies = ref<Movie[]>((moviesJson as Movie[]).sort((a, b) => b.created - a.created).slice(0, 10));
 const expandedMovieId = ref<string | null>(null);
 
 const toggleExpand = (id: string) => {
@@ -14,9 +12,9 @@ const toggleExpand = (id: string) => {
 </script>
 
 <template>
-  <transition-group v-if="movies.length > 0" name="fade" tag="div" class="latest-grid">
+  <transition-group v-if="store.latestMovies.length > 0" name="fade" tag="div" class="latest-grid">
     <movie-item
-      v-for="movie in movies"
+      v-for="movie in store.latestMovies"
       class="latest-item"
       :key="movie.id"
       :movie="movie"
@@ -26,7 +24,7 @@ const toggleExpand = (id: string) => {
   </transition-group>
 
   <transition name="fade">
-    <div v-if="movies.length === 0" class="no-results">{{ $t("noMovies") }}</div>
+    <div v-if="store.latestMovies.length === 0" class="no-results">{{ $t("noMovies") }}</div>
   </transition>
 </template>
 

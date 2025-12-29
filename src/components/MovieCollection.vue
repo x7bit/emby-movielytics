@@ -1,64 +1,36 @@
 <script setup lang="ts">
-import moviesJson from "@/assets/movies.json";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import MovieGrid from "@/components/MovieGrid.vue";
 import { Movie } from "@/entity/movie";
-import { computed, ref } from "vue";
-
-type SortType = "title" | "year" | "critic" | "audience";
-
-const movies = ref<Movie[]>((moviesJson as Movie[]).sort(Movie.sortByTitle));
-const search = ref("");
-const sortType = ref<SortType>("title");
-const sortAsc = ref(true);
+import { getSortIcon, sortMovies, store } from "@/store";
+import { computed } from "vue";
 
 const filteredMovies = computed(() => {
-  if (!search.value) return movies.value;
-  const term = search.value.toLowerCase();
-  return movies.value.filter(movie => {
-    return (
-      movie.title.toLowerCase().includes(term) ||
-      movie.originalTitle.toLowerCase().includes(term) ||
-      movie.directors.join(" ").toLowerCase().includes(term) ||
-      movie.actors.join(" ").toLowerCase().includes(term)
+  let _movies = [...store.movies];
+  if (store.search) {
+    const term = store.search.toLowerCase();
+    _movies = _movies.filter(
+      movie =>
+        movie.title.toLowerCase().includes(term) ||
+        movie.originalTitle.toLowerCase().includes(term) ||
+        movie.directors.join(" ").toLowerCase().includes(term) ||
+        movie.actors.join(" ").toLowerCase().includes(term)
     );
-  });
-});
-
-const sortMovies = (type: SortType): void => {
-  let asc = true;
-  switch (type) {
-    case "title":
-      asc = type === sortType.value ? !sortAsc.value : true;
-      movies.value.sort((a, b) => (asc ? Movie.sortByTitle(a, b) : Movie.sortByTitle(b, a)));
-      break;
-    case "year":
-      asc = type === sortType.value ? !sortAsc.value : false;
-      movies.value.sort((a, b) => (asc ? Movie.sortByYear(a, b) : Movie.sortByYear(b, a)));
-      break;
-    case "critic":
-      asc = type === sortType.value ? !sortAsc.value : false;
-      movies.value.sort((a, b) => (asc ? Movie.sortByCriticRating(a, b) : Movie.sortByCriticRating(b, a)));
-      break;
-    case "audience":
-      asc = type === sortType.value ? !sortAsc.value : false;
-      movies.value.sort((a, b) => (asc ? Movie.sortByAudienceRating(a, b) : Movie.sortByAudienceRating(b, a)));
-      break;
   }
-  sortType.value = type;
-  sortAsc.value = asc;
-};
-
-const getSortIcon = (type: SortType): string => {
-  if (sortType.value !== type) return "unfold_more";
-  return sortAsc.value ? "keyboard_arrow_up" : "keyboard_arrow_down";
-};
+  if (store.decadeFilter) {
+    _movies = _movies.filter(movie => Movie.decadeLabel(movie.year) === store.decadeFilter);
+  }
+  if (store.genreFilter) {
+    _movies = _movies.filter(movie => movie.genres.map(genre => Movie.genreLabel(genre)).includes(store.genreFilter));
+  }
+  return _movies;
+});
 </script>
 
 <template>
   <div class="movie-controls">
-    <base-input v-model="search" class="movie-search" :placeholder="$t('titleActorDirector')" clearable />
+    <base-input v-model="store.search" class="movie-search" :placeholder="$t('titleActorDirector')" clearable />
     <div class="movie-sort">
       <base-button class="movie-sort-btn" :icon-right="getSortIcon('title')" @click="sortMovies('title')">
         {{ $t("title") }}

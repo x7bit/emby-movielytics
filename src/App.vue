@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import LastAddedMovies from "@/components/LastestMovies.vue";
 import MovieCollection from "@/components/MovieCollection.vue";
-import MovieStatistics from "./components/MovieStatistics.vue";
+import MovieStatistics from "@/components/MovieStatistics.vue";
 </script>
 
 <template>
