@@ -40,7 +40,6 @@ const handleGenreBarClick = (label: string) => {
         :legend="$t('moviesLabel')"
         :labels="store.decades.labels"
         :data="store.decades.counts"
-        :selected-label="store.decadeFilter ? store.decadeFilter : undefined"
         @bar-click="handleDecadeBarClick"
       />
       <bar-chart
@@ -48,7 +47,6 @@ const handleGenreBarClick = (label: string) => {
         :legend="$t('moviesLabel')"
         :labels="store.genres.labels"
         :data="store.genres.counts"
-        :selected-label="store.genreFilter ? store.genreFilter : undefined"
         @bar-click="handleGenreBarClick"
       />
     </div>

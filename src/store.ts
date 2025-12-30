@@ -59,8 +59,8 @@ export const store = reactive({
   search: "",
   sortType: "title" as SortType,
   sortAsc: true,
-  decadeFilter: "",
-  genreFilter: "",
+  decadeFilter: undefined as string | undefined,
+  genreFilter: undefined as string | undefined,
 });
 
 export const sortMovies = (type: SortType): void => {
