@@ -22,28 +22,7 @@ const selectedLabel = ref<string | undefined>(undefined);
 let chartInstance: Chart | null = null;
 
 const getBackgroundColors = () => {
-  return props.labels.map((label) =>
-    label === selectedLabel.value ? "rgba(57, 186, 230, 1)" : "rgba(37, 74, 94, 1)"
-  );
-};
-
-const handleBarClick = (_event: any, elements: any[]): void => {
-  if (elements.length > 0) {
-    const index = elements[0].index;
-    const label = props.labels[index];
-    if (label) {
-      selectedLabel.value = label === selectedLabel.value ? undefined : label;
-        if (chartInstance?.data.datasets[0]) {
-          chartInstance.data.datasets[0].backgroundColor = getBackgroundColors();
-          chartInstance.update();
-        }
-        emit("barClick", label);
-    }
-  }
-};
-
-const handleBarHover = (event: any, elements: any[]) => {
-  event.native.target.style.cursor = elements.length > 0 ? "pointer" : "default";
+  return props.labels.map(label => (label === selectedLabel.value ? "rgba(57, 186, 230, 1)" : "rgba(37, 74, 94, 1)"));
 };
 
 onMounted(() => {
@@ -66,20 +45,35 @@ onMounted(() => {
     options: {
       maintainAspectRatio: false,
       responsive: true,
-      onClick: handleBarClick,
-      onHover: handleBarHover,
+      animation: { duration: 0 },
+      onClick: (_event, elements, chart) => {
+        if (elements[0]) {
+          const index = elements[0].index;
+          const label = props.labels[index];
+          if (label) {
+            selectedLabel.value = label === selectedLabel.value ? undefined : label;
+            if (chart.data.datasets[0]) {
+              chart.data.datasets[0].backgroundColor = getBackgroundColors();
+              chart.update();
+            }
+            emit("barClick", label);
+          }
+        }
+      },
+      onHover: (event, elements) => {
+        if (event.native?.target) {
+          const barEl = event.native.target as HTMLElement;
+          barEl.style.cursor = elements.length > 0 ? "pointer" : "default";
+        }
+      },
       plugins: {
         title: {
           display: true,
           text: props.title,
           color: "rgba(228, 226, 218, 1)",
-          font: {
-            size: 16,
-          },
+          font: { size: 16 },
         },
-        legend: {
-          display: false,
-        },
+        legend: { display: false },
         tooltip: {
           backgroundColor: "rgba(21, 70, 97, 1)",
           titleColor: "rgba(255, 255, 255, 0.9)",
@@ -92,20 +86,12 @@ onMounted(() => {
       scales: {
         y: {
           beginAtZero: true,
-          border: {
-            display: false,
-          },
-          grid: {
-            color: "rgba(255, 255, 255, 0.1)",
-          },
-          ticks: {
-            color: "rgba(255, 255, 255, 0.7)",
-          },
+          border: { display: false },
+          grid: { color: "rgba(255, 255, 255, 0.1)" },
+          ticks: { color: "rgba(255, 255, 255, 0.7)" },
         },
         x: {
-          grid: {
-            display: false,
-          },
+          grid: { display: false },
           ticks: {
             autoSkip: false,
             color: "rgba(255, 255, 255, 0.7)",
@@ -119,9 +105,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  if (chartInstance) {
-    chartInstance.destroy();
-  }
+  chartInstance?.destroy();
 });
 </script>
 
