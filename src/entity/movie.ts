@@ -21,18 +21,18 @@ export class Movie {
     return rating >= 0 ? rating.toFixed(1) : "–";
   }
 
-  static genreLabel(genre: string): string {
+  static genreKey(genre: string): string {
     switch (genre) {
       case "Science Fiction":
-        return "Sci-Fi";
+        return "sci_fi";
       default:
-        return genre;
+        return genre.toLowerCase().replace(/[ -]/g, "_");
     }
   }
 
-  static decadeLabel(year: number): string {
+  static decadeKey(year: number): string {
     const decade = Math.floor(year / 10) * 10;
-    return `${decade}s`;
+    return decade.toString();
   }
 
   static sortByTitle(a: Movie, b: Movie): number {

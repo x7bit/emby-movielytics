@@ -19,10 +19,10 @@ const filteredMovies = computed(() => {
     );
   }
   if (store.decadeFilter) {
-    _movies = _movies.filter(movie => Movie.decadeLabel(movie.year) === store.decadeFilter);
+    _movies = _movies.filter(movie => Movie.decadeKey(movie.year) === store.decadeFilter);
   }
   if (store.genreFilter) {
-    _movies = _movies.filter(movie => movie.genres.map(genre => Movie.genreLabel(genre)).includes(store.genreFilter ?? ""));
+    _movies = _movies.filter(movie => movie.genres.map(genre => Movie.genreKey(genre)).includes(store.genreFilter ?? ""));
   }
   return _movies;
 });

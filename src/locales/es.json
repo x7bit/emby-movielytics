@@ -17,5 +17,30 @@
   "minutes": "minuto | minutos",
   "moviesByDecade": "Películas por década",
   "moviesByGenre": "Películas por género",
-  "moviesLabel": "Películas"
+  "moviesLabel": "Películas",
+  "genre": {
+    "action": "Acción",
+    "adventure": "Aventura",
+    "animation": "Animación",
+    "anime": "Anime",
+    "children": "Infantil",
+    "comedy": "Comedia",
+    "crime": "Crimen",
+    "documentary": "Documental",
+    "drama": "Drama",
+    "family": "Familiar",
+    "fantasy": "Fantasía",
+    "history": "Historia",
+    "horror": "Terror",
+    "martial_arts": "Artes marciales",
+    "musical": "Musical",
+    "mystery": "Misterio",
+    "romance": "Romance",
+    "sci_fi": "Sci-Fi",
+    "sport": "Deportes",
+    "suspense": "Suspense",
+    "thriller": "Thriller",
+    "war": "Bélica",
+    "western": "Western"
+  }
 }

@@ -14,11 +14,15 @@ const totalDurationLabel = computed(() => {
 });
 
 const handleDecadeBarClick = (label: string) => {
-  store.decadeFilter = label === store.decadeFilter ? "" : label;
+  const idx = store.decades.labels.indexOf(label);
+  const key = idx >= 0 ? store.decades.keys[idx] : "";
+  store.decadeFilter = key === store.decadeFilter ? "" : key;
 };
 
 const handleGenreBarClick = (label: string) => {
-  store.genreFilter = label === store.genreFilter ? "" : label;
+  const idx = store.genres.labels.indexOf(label);
+  const key = idx >= 0 ? store.genres.keys[idx] : "";
+  store.genreFilter = key === store.genreFilter ? "" : key;
 };
 </script>
 

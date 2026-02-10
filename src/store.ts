@@ -1,52 +1,65 @@
 import moviesJson from "@/assets/movies.json";
 import { Movie } from "@/entity/movie";
+import i18n from "@/i18n";
 import { reactive } from "vue";
 
 type SortType = "title" | "year" | "critic" | "audience";
 
-type LabelsAndCounts = {
+type KeyLabelCounts = {
+  keys: string[];
   labels: string[];
   counts: number[];
 };
 
+type LabelCount = {
+  label: string;
+  count: number;
+};
+
 const movies = moviesJson as Movie[];
 
-const _decadeLabelsAndCounts = (): LabelsAndCounts => {
-  const map = new Map<string, number>();
+const _decadeKeysLabelsCounts = (): KeyLabelCounts => {
+  const keyMap = new Map<string, number>();
   movies.forEach(movie => {
-    const decade = Movie.decadeLabel(movie.year);
-    map.set(decade, (map.get(decade) ?? 0) + 1);
+    const decade = Movie.decadeKey(movie.year);
+    keyMap.set(decade, (keyMap.get(decade) ?? 0) + 1);
   });
 
+  const keys: string[] = [];
   const labels: string[] = [];
-  const decades = Array.from(map.keys()).map(label => parseInt(label));
+  const counts: number[] = [];
+  const decades = Array.from(keyMap.keys()).map(label => parseInt(label));
   const minDecade = Math.min(...decades);
   const maxDecade = Math.max(...decades);
   for (let decade = minDecade; decade <= maxDecade; decade += 10) {
+    keys.push(`${decade}`);
     labels.push(`${decade}s`);
+    counts.push(keyMap.get(`${decade}`) ?? 0);
   }
 
-  const counts: number[] = labels.map(decade => map.get(decade) ?? 0);
-
-  return { labels, counts };
+  return { keys, labels, counts };
 };
 
-const _genreLabelsAndCounts = (): LabelsAndCounts => {
-  const map = new Map<string, number>();
+const _genreKeyLabelCounts = (): KeyLabelCounts => {
+  const keyMap = new Map<string, LabelCount>();
   movies.forEach(movie => {
     movie.genres.forEach(genreRaw => {
-      const genre = Movie.genreLabel(genreRaw);
-      map.set(genre, (map.get(genre) ?? 0) + 1);
+      const key = Movie.genreKey(genreRaw);
+      const count = (keyMap.get(key)?.count ?? 0) + 1;
+      const label = i18n.global.t(`genre.${key}`);
+      keyMap.set(key, { label, count });
     });
   });
 
-  const labels: string[] = Array.from(map.keys())
-    .filter(genre => (map.get(genre) ?? 0) >= 10)
-    .sort();
+  const entries = Array.from(keyMap.entries())
+    .filter(entry => entry[1].count >= 10)
+    .sort((a, b) => a[1].label.localeCompare(b[1].label));
 
-  const counts: number[] = labels.map(genre => map.get(genre) ?? 0);
-
-  return { labels, counts };
+  return {
+    keys: entries.map(entry => entry[0]),
+    labels: entries.map(entry => entry[1].label),
+    counts: entries.map(entry => entry[1].count),
+  };
 };
 
 export const store = reactive({
@@ -54,8 +67,8 @@ export const store = reactive({
   latestMovies: [...movies].sort((a, b) => Movie.sortByCreated(b, a)).slice(0, 10),
   totalMovies: movies.length,
   totalDuration: movies.reduce((sum, movie) => sum + movie.duration, 0),
-  decades: _decadeLabelsAndCounts(),
-  genres: _genreLabelsAndCounts(),
+  decades: _decadeKeysLabelsCounts(),
+  genres: _genreKeyLabelCounts(),
   search: "",
   sortType: "title" as SortType,
   sortAsc: true,
