@@ -1,7 +1,7 @@
 {
   "name": "emby-movielytics",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.5.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,17 +13,17 @@
   },
   "dependencies": {
     "chart.js": "^4.5.1",
-    "vue": "^3.5.26",
-    "vue-i18n": "^11.2.8"
+    "vue": "^3.5.32",
+    "vue-i18n": "^11.3.2"
   },
   "devDependencies": {
-    "@types/node": "^25.0.8",
-    "@vitejs/plugin-vue": "^6.0.3",
-    "@vue/tsconfig": "^0.8.1",
-    "prettier": "^3.7.4",
-    "sass": "^1.97.2",
-    "typescript": "~5.9.3",
-    "vite": "^7.3.1",
-    "vue-tsc": "^3.2.2"
+    "@types/node": "^25.6.0",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "@vue/tsconfig": "^0.9.1",
+    "prettier": "^3.8.2",
+    "sass": "^1.99.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.8",
+    "vue-tsc": "^3.2.6"
   }
 }
