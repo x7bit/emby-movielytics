@@ -1,6 +1,6 @@
 {
   "name": "emby-movielytics-scraper",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "type": "module",
   "scripts": {
     "start": "cross-env NODE_OPTIONS=--no-warnings=DEP0180 node --import ./register-loader.js src/index.ts"
@@ -12,8 +12,8 @@
   "devDependencies": {
     "@types/node": "^25.6.0",
     "cross-env": "^10.1.0",
-    "prettier": "^3.8.2",
+    "prettier": "^3.8.3",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.3"
   }
 }
