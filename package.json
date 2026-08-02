@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "node -r ./scripts/patch-vue-tsc-resolve.cjs ./node_modules/vue-tsc/bin/vue-tsc.js -b && vite build",
     "preview": "vite preview",
-    "check": "vue-tsc --noEmit --pretty",
+    "check": "node -r ./scripts/patch-vue-tsc-resolve.cjs ./node_modules/vue-tsc/bin/vue-tsc.js --noEmit --pretty",
     "lint": "prettier --check . --end-of-line auto",
     "lint:fix": "prettier --check --write . --end-of-line auto"
   },
